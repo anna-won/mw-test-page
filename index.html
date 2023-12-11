@@ -15,6 +15,7 @@
   <script>
     function get(){
       let typped = document.getElementById('typedtext').value;
+      document.getElementById("result").innerText = name;
       console.log(typped)
     }
   </script>
@@ -25,4 +26,7 @@
     <h1>원하는 단을 입력해주세요</h1>
     <input type="text" placeholder="숫자를 입력하세요"  id="typedtext" name="txt">
     <input type="button"  value="클릭" onclick="get()">
+    <div id='result'></div>
 </body>
+
+</html>
