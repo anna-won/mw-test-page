@@ -12,21 +12,19 @@
     function getType(){
       let typped = document.getElementById('typedtext').value;
       document.getElementById("result").innerText = name;
-      alert(typped);
+      callSpCommon()
     }
     function callSpCommon() {
         var param = {};
-        param['deeplink'] = url;
-        param['package'] = pkg;
-        param['storeId'] = storeId;
-        
+        param['shareInfo'] = "shareInfo";
+
         var pSuccess = function (result) {
             success()
         }
         var pFailure = function (result) {
            alert(result['message'])
         }
-        return SpPlugin.callPlugin("SpCommonPlugin", "callApp", param, pSuccess, pFailure);
+        SpPlugin.callPlugin("SpCommonPlugin", "shareText", param, pSuccess, pFailure);
     }
   </script>
   <script src="/js/spPlugin.js"></script>
