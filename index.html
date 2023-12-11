@@ -8,12 +8,8 @@
 	<meta name="supported-color-schemes" content="light"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no, viewport-fit=cover">
   <title>모바일지갑 | HOME</title>
-  
-  <script type="application/javascript" src="/config/config.js"></script>
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-DTWQC51RZW"></script> -->
   <script>
-    function get(){
+    function getType(){
       let typped = document.getElementById('typedtext').value;
       document.getElementById("result").innerText = name;
       alert(typped);
@@ -25,7 +21,7 @@
 <body>
     <h1>원하는 단을 입력해주세요</h1>
     <input type="text" placeholder="숫자를 입력하세요"  id="typedtext" name="txt">
-    <input type="button"  value="클릭" onclick="get()">
+    <input type="button"  value="클릭" onclick="getType()">
     <div id='result'></div>
 </body>
 
