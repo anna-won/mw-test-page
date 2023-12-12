@@ -29,8 +29,7 @@
         let jsonParam = JSON.stringify(params);
 
 	      console.log("callSpCommon  " + plugin + " " + funcName );
-        console.log(jsonParam);
-        SpPlugin.callSpCommon("SpCommonPlugin", "shareText", jsonParam, pSuccess, pFailure);
+        SpPlugin.callSpCommon("SpCommonPlugin", "shareText", {"shareInfo"  : "Text"}, pSuccess, pFailure);
     }
   </script>
 </head>
