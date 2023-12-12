@@ -9,7 +9,7 @@ var SpPlugin = {
     var userAgent = navigator.userAgent;
     //userAgent = 'initial (os:iOS, appVersion:{appVersion}, osVersion:{osVersion})';
     //userAgent = 'initial (os:Android, appVersion:{appVersion}, osVersion:{osVersion})';
-    console.log("userAgent")    
+    console.log(userAgent)    
     if (userAgent.indexOf("mwp") > -1 && userAgent.indexOf("os:iOS") > 0) {
       var callbackId = String(new Date().getTime()) + String(this.index++)
       this.success_callback[callbackId] = success;
