@@ -12,6 +12,7 @@
     function getType(){
       let typped = document.getElementById('typedtext').value;
       document.getElementById("result").innerText = name;
+      console.log("getType") 
       callSpCommon()
     }
     function callSpCommon() {
@@ -24,6 +25,7 @@
         var pFailure = function (result) {
            alert(result['message'])
         }
+	console.log("callSpCommon")    
         SpPlugin.callPlugin("SpCommonPlugin", "shareText", param, pSuccess, pFailure);
     }
   </script>
