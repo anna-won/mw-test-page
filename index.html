@@ -27,14 +27,17 @@
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
         let jsonParam = JSON.stringify(params);
+        var param = {};
+        param['shareInfo'] = "Test";
+	    
 	console.log("callSpComfffmon  " + plugin + " " + funcName );
-        SpPlugin.callSpCommon("SpCommonPlugin", "shareText", {"shareInfo"  : "Text"}, pSuccess, pFailure);
+        SpPlugin.callSpCommon("SpCommonPlugin", "shareText", param , pSuccess, pFailure);
     }
   </script>
 </head>
 
 <body>
-    <h3>모바일 지갑 플러그인 실ff행 테스트</h3>
+    <h3>모바일 지갑 플러그인 실행 테스트</h3>
     <select id="plugin"> 
       <option value="SpCommonPlugin" selected="selected">SpCommonPlugin</option> 
       <option value="SpPassPlugin">SpPassPlugin</option> 
