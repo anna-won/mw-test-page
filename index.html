@@ -10,76 +10,6 @@
   <title>모바일지갑 | HOME</title>
   <script src="/js/spPlugin.js"></script>
   <script>
-    var SpPlugin = {
-  index: 0,
-  success_callback: [],
-  failure_callback: [],
-
-  //Android, iOS webview Interface 호출
-  callPlugin: function (pluginName, funcName, param, success, failure) {
-    //Android, iOS Webview UserAgent 값 가져오기
-    var userAgent = navigator.userAgent;
-    //userAgent = 'initial (os:iOS, appVersion:{appVersion}, osVersion:{osVersion})';
-    //userAgent = 'initial (os:Android, appVersion:{appVersion}, osVersion:{osVersion})';
-    console.log("callPlugin")    
-    if (userAgent.indexOf("mwp") > -1 && userAgent.indexOf("os:iOS") > 0) {
-      var callbackId = String(new Date().getTime()) + String(this.index++)
-      this.success_callback[callbackId] = success;
-      this.failure_callback[callbackId] = failure;
-      var str = JSON.stringify(param);
-      var encode = btoa(unescape(encodeURIComponent(str)))
-        
-      var message = JSON.stringify({
-        funcName: funcName,
-        callbackId: callbackId,
-        param: encode,
-      });
-      try {
-        new Function('window.webkit.messageHandlers.'+pluginName+'.postMessage(\''+message+'\')')();
-        return false;
-      } catch {
-        failure({"message": "noPlugin"});
-      }
-
-    } else if (userAgent.indexOf("mwp") > -1 && userAgent.indexOf("os:Android") > 0) {
-      var callbackId = String(new Date().getTime()) + String(this.index++)
-      this.success_callback[callbackId] = success;
-      this.failure_callback[callbackId] = failure;
-      var str = JSON.stringify(param);
-      var encode = btoa(unescape(encodeURIComponent(str)))
-      
-      var message = JSON.stringify({
-      funcName: funcName,
-      param: encode,
-      callbackId: callbackId,
-      });
-
-      try {
-        new Function(pluginName+'.postMessage(\''+message+'\')')();
-        return false;
-      } catch (error) {
-        failure({"message": "noPlugin"});
-      }
-
-    } else if (userAgent.indexOf("mwp") === -1) {
-      return true;
-    } 
-    else {
-      alert("잘못된 접근이거나 올바른 요청이 아닙니다.");
-    }
-  },
-  success: function (callbackId, param) {
-    var str = decodeURIComponent(escape(atob(param)))
-    const obj = JSON.parse(str)
-    SpPlugin.success_callback[callbackId](obj);
-  },
-  failure: function (callbackId, param) {
-    var str = decodeURIComponent(escape(atob(param)))
-    const obj = JSON.parse(str)
-    SpPlugin.failure_callback[callbackId](obj);
-  },
-};
-	  
     function getType(){
       let typped = document.getElementById('typedtext').value;
       document.getElementById("result").innerText = name;
@@ -87,26 +17,36 @@
       callSpCommon()
     }
     function callSpCommon() {
-        var param = {};
-        param['shareInfo'] = "shareInfo";
-
         var pSuccess = function (result) {
             success()
         }
         var pFailure = function (result) {
            alert(result['message'])
         }
-	console.log("callSpCommon")    
-        SpPlugin.callPlugin("SpCommonPlugin", "shareText", param, pSuccess, pFailure);
+        let plugin = document.getElementById("plugin").value;
+        let funcName = document.getElementById("func").value;
+        let params = document.getElementById("params").value;
+        let jsonParam = JSON.stringify(params);
+
+	      console.log("callSpCommon  " + plugin + " " + funcName );
+        console.log(jsonParam);
+        SpPlugin.callPlugin("SpCommonPlugin", "shareText", jsonParam, pSuccess, pFailure);
     }
   </script>
 </head>
 
 <body>
-    <h1>원하는 단을 입력해주세요</h1>
-    <input type="text" placeholder="숫자를 입력하세요"  id="typedtext" name="txt">
-    <input type="button"  value="클릭" onclick="getType()">
-    <div id='result'></div>
+    <h3>모바일 지갑 플러그인 실행 테스트</h3>
+    <select id="plugin"> 
+      <option value="SpCommonPlugin" selected="selected">SpCommonPlugin</option> 
+      <option value="SpPassPlugin">SpPassPlugin</option> 
+      <option value="SpGovernmentPlugin">SpGovernmentPlugin</option> 
+      <option value="SpMobileWalletPlugin">SpMobileWalletPlugin</option> 
+    </select>
+    <input type="text" placeholder="함수명 입력"  id="func" name="txt">
+    <p><textarea cols="50" rows="5" placeholder="파라미터 입력 { key : value }" id='params'></textarea></p>
+    <input type="button"  value="실행하기" onclick="callSpCommon()">
+
 </body>
 
 </html>
