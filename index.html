@@ -10,13 +10,37 @@
   <title>모바일지갑 | HOME</title>
   <script src="/js/spPlugin.js"></script>
   <script>
-    function getType(){
-      let typped = document.getElementById('typedtext').value;
-      document.getElementById("result").innerText = name;
-      console.log("getType") 
-      callSpCommon()
+    var parameters = {}
+
+    function addParam(){
+      let key = document.getElementById("key").value;
+      let value = document.getElementById("value").value;
+      parameters[key] = value;
+      reArrangeSelect(); 
+    }
+    function removeParam(){
+      let selectValue = document.getElementById("params").value;
+      let seperateValue = selectValue.split(' : ');
+      console.log(seperateValue[0]);
+      delete parameters[seperateValue[0]];
+      reArrangeSelect()
+    }
+    function reArrangeSelect(){
+      
+      var paramsSelect = document.getElementById("params");
+      paramsSelect.options.length = 0;
+
+      for(p in parameters)  {
+        var option = document.createElement("option");
+        var desc =  p + " : "  + parameters[p];
+        option.value = desc;
+        option.innerHTML = desc;
+        paramsSelect.appendChild(option);
+      }
+
     }
     function callSpCommon() {
+
         var pSuccess = function (result) {
             success()
         }
@@ -27,11 +51,9 @@
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
         let jsonParam = JSON.stringify(params);
-        var param = {};
-        param['shareInfo'] = "Test";
-	    
-	console.log("callSpComfffmon  " + plugin + " " + funcName );
-        SpPlugin.callSpCommon("SpCommonPlugin", "shareText", param , pSuccess, pFailure);
+
+	      console.log("callSpCommon  " + plugin + " " + funcName );
+        SpPlugin.callSpCommon(plugin, funcName, parameters, pSuccess, pFailure);
     }
   </script>
 </head>
@@ -45,7 +67,19 @@
       <option value="SpMobileWalletPlugin">SpMobileWalletPlugin</option> 
     </select>
     <input type="text" placeholder="함수명 입력"  id="func" name="txt">
-    <p><textarea cols="50" rows="5" placeholder="파라미터 입력 { key : value }" id='params'></textarea></p>
+    <br><br>파라미터입력
+    <p>
+      <input type="text" placeholder="Key"  id="key" name="txt">
+      :
+      <input type="text" placeholder="Value"  id="value" name="txt">
+      <input type="button"  value="추가" onclick="addParam()">
+    </p>
+    <p>
+      입력된 파라미터 <br><br>
+      <select id="params">  
+      </select>
+      <input type="button"  value="삭제" onclick="removeParam()">
+    </p>
     <input type="button"  value="실행하기" onclick="callSpCommon()">
 
 </body>
