@@ -47,12 +47,13 @@
         var pFailure = function (result) {
            alert(result['message'])
         }
+	var jsonText = document.getElementById("json").value;	    
         let plugin = document.getElementById("plugin").value;
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
-        let jsonParam = JSON.stringify(params);
+        let jsonParam = JSON.stringify(jsonText);
 
-	      console.log("callSpCommon  " + plugin + " " + funcName );
+	console.log("callSpCommon  " + plugin + " " + funcName );
         SpPlugin.callPlugin(plugin, funcName, parameters, pSuccess, pFailure);
     }
   </script>
@@ -67,7 +68,7 @@
       <option value="SpMobileWalletPlugin">SpMobileWalletPlugin</option> 
     </select>
     <input type="text" placeholder="함수명 입력"  id="func" name="txt">
-    <br><br>파라미터입력
+    <br><br>파라미터입력(Key : Value)
     <p>
       <input type="text" placeholder="Key"  id="key" name="txt">
       :
@@ -79,6 +80,10 @@
       <select id="params">  
       </select>
       <input type="button"  value="삭제" onclick="removeParam()">
+    </p>
+    <p>	
+	    <br><br>JSON
+	    <textarea id="json"></textarea>
     </p>
     <input type="button"  value="실행하기" onclick="callSpCommon()">
 
