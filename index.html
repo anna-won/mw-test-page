@@ -52,7 +52,7 @@
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
         let jsonParam = JSON.stringify(jsonText);
-
+        console.log("jsonText : " + jsonText );
 	console.log("callSpCommon  " + plugin + " " + funcName );
         SpPlugin.callPlugin(plugin, funcName, parameters, pSuccess, pFailure);
     }
