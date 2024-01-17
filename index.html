@@ -70,7 +70,8 @@
       <option value="SpMobileWalletPlugin">SpMobileWalletPlugin</option> 
     </select>
     <input type="text" placeholder="함수명 입력"  id="func" name="txt">
-    <br><br>파라미터입력(Key : Value)
+<!-- 
+<br><br>파라미터입력(Key : Value)
     <p>
       <input type="text" placeholder="Key"  id="key" name="txt">
       :
@@ -83,9 +84,10 @@
       </select>
       <input type="button"  value="삭제" onclick="removeParam()">
     </p>
+-->
     <p>	
-	    <br><br>JSON
-	    <textarea id="json"></textarea>
+	    <br><br>JSON Text 입력
+	    <textarea cols="50" rows="15" id="json"></textarea>
     </p>
     <input type="button"  value="실행하기" onclick="callSpCommon()">
 
