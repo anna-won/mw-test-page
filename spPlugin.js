@@ -16,6 +16,9 @@ var SpPlugin = {
       this.success_callback[callbackId] = success;
       this.failure_callback[callbackId] = failure;
       var str = JSON.stringify(param);
+      console.log(param);
+      console.log(str);
+      
       var encode = btoa(unescape(encodeURIComponent(str)))
         
       var message = JSON.stringify({
