@@ -51,10 +51,12 @@
         let plugin = document.getElementById("plugin").value;
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
-        let jsonParam = JSON.stringify(params);
-        console.log("jsonText : 2" + jsonText );
+        let jsonParam = JSON.stringify(jsonText);
+	var paramMap = new Map(JSON.parse(jsonText));
+	    
+        console.log("jsonText : 3" + jsonText + paramMap);
 	console.log("callSpCommon  " + plugin + " " + funcName );
-        SpPlugin.callPlugin(plugin, funcName, jsonParam, pSuccess, pFailure);
+        SpPlugin.callPlugin(plugin, funcName, paramMap , pSuccess, pFailure);
     }
   </script>
 </head>
