@@ -9,15 +9,15 @@ var SpPlugin = {
     var userAgent = navigator.userAgent;
     //userAgent = 'initial (os:iOS, appVersion:{appVersion}, osVersion:{osVersion})';
     //userAgent = 'initial (os:Android, appVersion:{appVersion}, osVersion:{osVersion})';
+    var str = JSON.stringify(param);
     console.log("SPPlugin::callPlugin");   
+    console.log(param);
+    console.log(str);
     console.log(userAgent)    
     if (userAgent.indexOf("mwp") > -1 && userAgent.indexOf("os:iOS") > 0) {
       var callbackId = String(new Date().getTime()) + String(this.index++)
       this.success_callback[callbackId] = success;
       this.failure_callback[callbackId] = failure;
-      var str = JSON.stringify(param);
-      console.log(param);
-      console.log(str);
       
       var encode = btoa(unescape(encodeURIComponent(str)))
         
