@@ -47,17 +47,16 @@
         var pFailure = function (result) {
            alert(result['message'])
         }
+	console.log("1")
 	var jsonText = document.getElementById("json").value;	    
         let plugin = document.getElementById("plugin").value;
         let funcName = document.getElementById("func").value;
         let params = document.getElementById("params").value;
         let jsonParam = JSON.stringify(jsonText);
-	var paramMap = new Map(JSON.parse(jsonParam));
-	var map = JSON.parse(jsonText);
 	    
         console.log("jsonText : 4" + jsonText + paramMap);
 	console.log("callSpCommon  " + plugin + " " + funcName );
-        SpPlugin.callPlugin(plugin, funcName, paramMap , pSuccess, pFailure);
+        SpPlugin.callPlugin(plugin, funcName, JSON.parse(jsonText) , pSuccess, pFailure);
     }
   </script>
 </head>
